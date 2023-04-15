@@ -60,7 +60,7 @@ export class SeatmapComponent implements OnInit {
               map: 'flight-seats',
               roam: true,
               selectedMode: 'multiple',
-              layoutCenter: ['50%', '90%'],
+              layoutCenter: ['30%', '90%'],
               layoutSize: '170%', //size of seating map on card
               tooltip: {
                 show: true,
