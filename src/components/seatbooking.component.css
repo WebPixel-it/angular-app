@@ -1,9 +1,3 @@
-/* svg height and width are required for eCharts to render seatmap  */
-#seatmap {
-  height: 600px;
-  width: 600px;
-  margin: 0 auto;
-}
 .container {
   display: flex;
   justify-content: center;

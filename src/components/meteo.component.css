@@ -1,0 +1,24 @@
+.Main {
+  height: 100%;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.divider {
+  width: 100%;
+  margin: 20px 0 20px 0;
+}
+.row {
+  display: flex;
+  width: 300px;
+  max-width: 95vw;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+.Gauge {
+  height: 250px;
+  width: 300px;
+}

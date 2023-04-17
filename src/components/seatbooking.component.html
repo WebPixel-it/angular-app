@@ -1,0 +1,42 @@
+<div class="central">
+  <!-- seat map card -->
+  <div class="CardSeats">
+    <!-- import on click chosen seat data from child component -->
+    <h2>Please select your seat</h2>
+
+    <div class="seatlist">
+      <p>Selected seats:</p>
+
+      <p *ngFor="let seats of selectedNames">{{ seats }},</p>
+    </div>
+    <mat-divider style="width: 100%; margin: 10px 0 0 0"></mat-divider>
+    <h4>Hover map to scroll and drag</h4>
+    <seatmap (selectedNamesChange)="onSelectedNamesChange($event)"></seatmap>
+  </div>
+  <!-- end seat map card-->
+  <!-- start conditional render passanger booking form-->
+  <div class="cardBooking">
+    <div *ngFor="let seats of selectedNames">
+      <div *ngIf="seats" class="bookingInput">
+        <p>{{ seats }}</p>
+        <mat-form-field class="form-field">
+          <mat-label>First name</mat-label>
+          <input maxlength="3" matInput />
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Last Name</mat-label>
+          <input maxlength="6" matInput
+        /></mat-form-field>
+      </div>
+    </div>
+
+    <!--start content to render only if no seats selected -->
+
+    <div *ngIf="!(selectedNames && selectedNames.length)" class="cardMeteo">
+      <h2>Local Weather</h2>
+      <h4>Departure and Arrival Locations</h4>
+      <meteo></meteo>
+    </div>
+  </div>
+  <!--end right side content-->
+</div>

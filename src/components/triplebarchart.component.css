@@ -1,0 +1,31 @@
+.chart {
+  width: 500px;
+  max-width: 90vw;
+  max-height: 100vh;
+  height: 500px;
+  margin: 0px auto;
+  padding-top: 30px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 4px 4px 6px #a9a9a9, -4px -4px 6px #ffffff;
+}
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+}
+
+@media only screen and (max-width: 900px) {
+  .main {
+    background: #d3d2d2;
+    margin-top: 20px;
+  }
+  .chart {
+    box-shadow: 5px 5px 14px #c4c3c3, -5px -5px 14px #e2e1e1;
+    height: 400px;
+  }
+}

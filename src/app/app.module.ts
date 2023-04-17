@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SeatmapComponent } from '../components/seatmap.component';
+import { SeatbookingComponent } from '../components/seatbooking.component';
+import { TriplebarchartComponent } from 'src/components/triplebarchart.component';
 import { MeteoComponent } from '../components/meteo.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +17,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
-  declarations: [AppComponent, MeteoComponent, SeatmapComponent],
+  declarations: [
+    AppComponent,
+    MeteoComponent,
+    SeatmapComponent,
+    SeatbookingComponent,
+    TriplebarchartComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -15,7 +15,7 @@ export class MeteoComponent implements OnInit {
   currentCity: string;
   @ViewChild('meteo', { static: true }) meteoRef!: ElementRef;
 
-  private chart: any; //chart is private and initialized to null
+  private chart: any;
 
   constructor() {
     this.chart = null;
