@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [AppComponent, MeteoComponent, SeatmapComponent],
@@ -22,6 +25,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatDividerModule,
     MatInputModule,
     MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -232,6 +232,20 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner"></div>
+<mat-toolbar
+  class="mat-elevation-z6"
+  style="background-color: #710005; color: #fff"
+>
+  <!-- toolbar content -->
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Flight Seat Booking</button>
+    <button mat-menu-item>Bar Chart</button>
+  </mat-menu>
+  <span>Angular App</span>
+</mat-toolbar>
 
 <div class="main" role="main">
   <div class="central">
