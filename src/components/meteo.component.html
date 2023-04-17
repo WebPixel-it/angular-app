@@ -1,11 +1,23 @@
 <style>
   .Main {
-    height: 350px;
+    height: 100%;
     width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+  .divider {
+    width: 100%;
+    margin: 20px 0 20px 0;
+  }
+  .row {
+    display: flex;
+    width: 300px;
+    max-width: 95vw;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
   }
   .Gauge {
     height: 250px;
@@ -14,6 +26,23 @@
 </style>
 
 <div class="Main">
+   <!--- local temp gauge animation -->
   <div #meteo class="Gauge"></div>
-  <mat-divider style="width: 100%; margin: 10px 0 0 0"></mat-divider>
+  <mat-divider class="divider"/>
+  <!--- rows with weather icon and text -->
+  <div *ngIf="currentCity === 'Milano'" class="row">
+    <mat-icon fontIcon="air"></mat-icon>
+    <span>23 km/h</span>
+    <span>Milano </span>
+    <span class="material-symbols-rounded">rainy</span>
+    <span>61%</span>
+  </div>
+  <div *ngIf="currentCity === 'Athens' || currentCity == ''" class="row">
+    <mat-icon fontIcon="air"></mat-icon>
+    <span>12 km/h</span>
+    <span>Athens </span>
+    <span class="material-symbols-rounded">clear_day</span>
+    <span>48%</span>
+  </div>
+  <mat-divider class="divider"/>
 </div>
