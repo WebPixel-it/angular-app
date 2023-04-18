@@ -13,7 +13,7 @@ echarts.use([GaugeChart, CanvasRenderer]);
 export class MeteoComponent implements OnInit {
   currentValue: number;
   currentCity: string;
-  @ViewChild('meteo', { static: true }) meteoRef!: ElementRef;
+  @ViewChild('meteo', { static: true }) meteoRef: ElementRef | null = null;
 
   private chart: any;
 
@@ -24,169 +24,175 @@ export class MeteoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const chartElement = this.meteoRef.nativeElement;
-    const myChart = echarts.init(chartElement);
+    this.initChart();
+  }
 
-    let currentCity = '';
-    let currentValue = 36;
-    const updateChart = (value: number, city: string) => {
-      this.currentValue = value;
-      this.currentCity = city;
-    };
+  initChart(): void {
+    if (this.meteoRef) {
+      const chartElement = this.meteoRef.nativeElement;
+      const myChart = echarts.init(chartElement);
 
-    const values = [25, 36];
-    const cities = ['Milano', 'Athens'];
-    let counter = 0;
-    let count = 0;
+      let currentCity = '';
+      let currentValue = 36;
+      const updateChart = (value: number, city: string) => {
+        this.currentValue = value;
+        this.currentCity = city;
+      };
 
-    const option = {
-      series: [
-        {
-          type: 'gauge',
-          center: ['50%', '60%'],
-          startAngle: 200,
-          endAngle: -20,
-          min: 0,
-          max: 50,
-          splitNumber: 10,
-          itemStyle: {
-            color: '#b30d0d',
-            shadowColor: 'rgba(0,138,255,0.45)',
-            shadowBlur: 10,
-            shadowOffsetX: 2,
-            shadowOffsetY: 2,
-          },
-          progress: {
-            show: true,
-            width: 30,
-          },
-          pointer: {
-            show: false,
-          },
-          axisLine: {
-            lineStyle: {
-              width: 30,
-            },
-          },
-          axisTick: {
-            distance: -45,
-            splitNumber: 5,
-            lineStyle: {
-              width: 2,
-              color: '#999',
-            },
-          },
-          splitLine: {
-            distance: -52,
-            length: 14,
-            lineStyle: {
-              width: 3,
-              color: '#999',
-            },
-          },
-          axisLabel: {
-            distance: -10,
-            color: '#999',
-            fontSize: 14,
-          },
-          anchor: {
-            show: false,
-          },
-          title: {
-            show: false,
-          },
-          detail: {
-            valueAnimation: true,
-            width: '80%',
-            lineHeight: 30,
-            borderRadius: 8,
-            offsetCenter: [0, '-15%'],
-            fontSize: 25,
-            fontWeight: 'bolder',
-            formatter: () => {
-              return this.currentValue + `°C` + '\n' + this.currentCity;
-            },
-            color: 'inherit',
-          },
-          data: [
-            {
-              value: 36,
-            },
-          ],
-        },
-        {
-          type: 'gauge',
-          center: ['50%', '60%'],
-          startAngle: 200,
-          endAngle: -20,
-          min: 0,
-          max: 50,
+      const values = [25, 36];
+      const cities = ['Milano', 'Athens'];
+      let counter = 0;
+      let count = 0;
 
-          itemStyle: {
-            color: '#5f1010',
-            shadowColor: 'rgba(95,16,16,0.75)',
-            shadowBlur: 5,
-            shadowOffsetX: 2,
-            shadowOffsetY: 2,
-          },
-          progress: {
-            show: true,
-            width: 8,
-          },
-          pointer: {
-            show: false,
-          },
-          axisLine: {
-            show: false,
-          },
-          axisTick: {
-            show: false,
-          },
-          splitLine: {
-            show: false,
-          },
-          axisLabel: {
-            show: false,
-          },
-          detail: {
-            show: false,
-          },
-          data: [
-            {
-              value: 36,
-            },
-          ],
-        },
-      ],
-    };
-
-    setInterval(function () {
-      const value = values[counter];
-      counter = (counter + 1) % values.length;
-
-      const city = cities[count];
-      count = (count + 1) % cities.length;
-      updateChart(value, city);
-
-      myChart.setOption({
+      const option = {
         series: [
           {
+            type: 'gauge',
+            center: ['50%', '60%'],
+            startAngle: 200,
+            endAngle: -20,
+            min: 0,
+            max: 50,
+            splitNumber: 10,
+            itemStyle: {
+              color: '#b30d0d',
+              shadowColor: 'rgba(0,138,255,0.45)',
+              shadowBlur: 10,
+              shadowOffsetX: 2,
+              shadowOffsetY: 2,
+            },
+            progress: {
+              show: true,
+              width: 30,
+            },
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              lineStyle: {
+                width: 30,
+              },
+            },
+            axisTick: {
+              distance: -45,
+              splitNumber: 5,
+              lineStyle: {
+                width: 2,
+                color: '#999',
+              },
+            },
+            splitLine: {
+              distance: -52,
+              length: 14,
+              lineStyle: {
+                width: 3,
+                color: '#999',
+              },
+            },
+            axisLabel: {
+              distance: -10,
+              color: '#999',
+              fontSize: 14,
+            },
+            anchor: {
+              show: false,
+            },
+            title: {
+              show: false,
+            },
+            detail: {
+              valueAnimation: true,
+              width: '80%',
+              lineHeight: 30,
+              borderRadius: 8,
+              offsetCenter: [0, '-15%'],
+              fontSize: 25,
+              fontWeight: 'bolder',
+              formatter: () => {
+                return this.currentValue + `°C` + '\n' + this.currentCity;
+              },
+              color: 'inherit',
+            },
             data: [
               {
-                value: value,
+                value: 36,
               },
             ],
           },
           {
+            type: 'gauge',
+            center: ['50%', '60%'],
+            startAngle: 200,
+            endAngle: -20,
+            min: 0,
+            max: 50,
+
+            itemStyle: {
+              color: '#5f1010',
+              shadowColor: 'rgba(95,16,16,0.75)',
+              shadowBlur: 5,
+              shadowOffsetX: 2,
+              shadowOffsetY: 2,
+            },
+            progress: {
+              show: true,
+              width: 8,
+            },
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            detail: {
+              show: false,
+            },
             data: [
               {
-                value: value,
+                value: 36,
               },
             ],
           },
         ],
-      });
-    }, 3000);
-    myChart.setOption(option);
+      };
+
+      setInterval(() => {
+        const value = values[counter];
+        counter = (counter + 1) % values.length;
+
+        const city = cities[count];
+        count = (count + 1) % cities.length;
+        updateChart(value, city);
+
+        myChart.setOption({
+          series: [
+            {
+              data: [
+                {
+                  value: value,
+                },
+              ],
+            },
+            {
+              data: [
+                {
+                  value: value,
+                },
+              ],
+            },
+          ],
+        });
+      }, 3000);
+      myChart.setOption(option);
+    }
   }
 }

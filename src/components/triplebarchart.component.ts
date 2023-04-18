@@ -1,17 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import * as echarts from 'echarts/core';
 import {
   DatasetComponent,
-  DatasetComponentOption,
   TooltipComponent,
-  TooltipComponentOption,
   GridComponent,
-  GridComponentOption,
   LegendComponent,
-  LegendComponentOption,
 } from 'echarts/components';
-import { BarChart, BarSeriesOption } from 'echarts/charts';
+import { BarChart } from 'echarts/charts';
 import { SVGRenderer } from 'echarts/renderers';
+
 echarts.use([
   DatasetComponent,
   TooltipComponent,
@@ -20,52 +17,50 @@ echarts.use([
   BarChart,
   SVGRenderer,
 ]);
-type EChartsOption = echarts.ComposeOption<
-  | DatasetComponentOption
-  | TooltipComponentOption
-  | GridComponentOption
-  | LegendComponentOption
-  | BarSeriesOption
->;
 
 @Component({
   selector: 'triplebarchart',
   templateUrl: './triplebarchart.component.html',
   styleUrls: ['./triplebarchart.component.css'],
 })
-export class TriplebarchartComponent implements OnInit {
-  @ViewChild('chart', { static: true }) private chartRef!: ElementRef;
+export class TriplebarchartComponent implements AfterViewInit {
+  @ViewChild('chart', { static: false })
+  chartContainer: ElementRef | null = null;
 
-  private myChart!: echarts.ECharts;
-  private option!: EChartsOption;
+  constructor() {}
 
-  ngOnInit() {
-    const chartElement = this.chartRef.nativeElement;
-    this.myChart = echarts.init(chartElement);
-    this.option = {
-      legend: {},
-      tooltip: {},
-      dataset: {
-        dimensions: ['product', '2015', '2016', '2017'],
-        source: [
-          { product: 'Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7 },
-          { product: 'Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1 },
-          { product: 'Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5 },
-          {
-            product: 'Walnut Brownie',
-            '2015': 72.4,
-            '2016': 53.9,
-            '2017': 39.1,
-          },
-        ],
-      },
-      xAxis: { type: 'category' },
-      yAxis: {},
-      // Declare several bar series, each will be mapped
-      // to a column of dataset.source by default.
-      series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
-    };
+  ngAfterViewInit(): void {
+    this.initChart();
+  }
 
-    this.option && this.myChart.setOption(this.option);
+  initChart(): void {
+    if (this.chartContainer) {
+      const chartDom = this.chartContainer.nativeElement;
+      const myChart = echarts.init(chartDom, 'light', { renderer: 'svg' });
+
+      const option = {
+        legend: {},
+        tooltip: {},
+        dataset: {
+          dimensions: ['product', '2015', '2016', '2017'],
+          source: [
+            { product: 'Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7 },
+            { product: 'Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1 },
+            { product: 'Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5 },
+            {
+              product: 'Walnut Brownie',
+              '2015': 72.4,
+              '2016': 53.9,
+              '2017': 39.1,
+            },
+          ],
+        },
+        xAxis: { type: 'category' },
+        yAxis: {},
+        series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
+      };
+
+      myChart.setOption(option);
+    }
   }
 }
